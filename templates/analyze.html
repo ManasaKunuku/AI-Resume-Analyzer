@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Analyze resume | ResumeIQ{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">RESUME ANALYSIS</div><h1>Compare your resume</h1><p class="muted">Add a resume and the job description you are targeting.</p></div></div>
+<div class="form-card wide">
+<form method="post" enctype="multipart/form-data">
+  <label>Resume file <input type="file" name="resume" accept=".pdf,.docx,.txt" required><small>PDF, DOCX, or TXT · Maximum 5 MB</small></label>
+  <label>Target job title <input name="job_title" placeholder="e.g. Python Developer" maxlength="150"></label>
+  <label>Job description <textarea name="job_description" rows="10" required placeholder="Paste the full job description here..."></textarea></label>
+  <button class="btn full">Analyze resume</button>
+</form>
+<p class="privacy-note">Your resume is processed by this local application and its extracted text is not sent to an external AI service. This demo stores uploaded files in the local uploads folder.</p>
+</div>
+{% endblock %}

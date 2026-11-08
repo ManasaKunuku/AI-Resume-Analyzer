@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+{% block title %}ResumeIQ | Resume Analyzer{% endblock %}
+{% block content %}
+<section class="hero">
+  <div class="eyebrow">SMARTER JOB APPLICATIONS</div>
+  <h1>Make your resume<br><span>work harder.</span></h1>
+  <p>Compare your resume with a job description, discover relevant skills, and get practical suggestions to improve your application.</p>
+  <div class="actions"><a class="btn" href="{{ url_for('register') }}">Analyze my resume</a><a class="btn secondary" href="{{ url_for('login') }}">I have an account</a></div>
+  <div class="feature-grid">
+    <article><b>01</b><h3>Upload</h3><p>Use a PDF, DOCX, or TXT resume.</p></article>
+    <article><b>02</b><h3>Compare</h3><p>Match your resume to a target job description.</p></article>
+    <article><b>03</b><h3>Improve</h3><p>Review skills and clear next steps.</p></article>
+  </div>
+</section>
+{% endblock %}

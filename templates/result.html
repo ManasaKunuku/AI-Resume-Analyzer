@@ -1,0 +1,19 @@
+{% extends "base.html" %}
+{% block title %}Analysis result | ResumeIQ{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">ANALYSIS REPORT</div><h1>{{ record.job_title }}</h1><p class="muted">{{ record.filename }}{% if historical %} · Saved report{% endif %}</p></div><a class="btn secondary" href="{{ url_for('analyze') }}">Analyze another</a></div>
+<div class="result-top">
+  <div class="score-card"><div class="score-number">{{ result.score }}<small>/100</small></div><strong>Resume match score</strong><p>Guidance score, not a hiring prediction.</p></div>
+  <div class="metric-card"><span class="muted">Text similarity</span><strong>{% if result.similarity is not none %}{{ result.similarity }}%{% else %}Not stored{% endif %}</strong><p>TF-IDF cosine similarity between resume and job description.</p></div>
+</div>
+<div class="two-col">
+  <section class="panel"><h2>Matched skills <span class="count">{{ result.matched_skills|length }}</span></h2>
+  {% if result.matched_skills %}<div class="tags">{% for skill in result.matched_skills %}<span class="tag good">{{ skill }}</span>{% endfor %}</div>{% else %}<p class="muted">No matching skills detected from the built-in skills list.</p>{% endif %}</section>
+  <section class="panel"><h2>Skills to consider <span class="count">{{ result.missing_skills|length }}</span></h2>
+  {% if result.missing_skills %}<div class="tags">{% for skill in result.missing_skills %}<span class="tag missing">{{ skill }}</span>{% endfor %}</div>{% else %}<p class="muted">No missing skills detected from the built-in list.</p>{% endif %}</section>
+</div>
+<section class="panel"><h2>Resume sections detected</h2><div class="tags">{% for section in result.sections_found %}<span class="tag good">{{ section }}</span>{% endfor %}{% for section in result.sections_missing %}<span class="tag neutral">{{ section }} not detected</span>{% endfor %}</div></section>
+<section class="panel"><h2>Improvement suggestions</h2><ol class="suggestions">{% for item in result.suggestions %}<li>{{ item }}</li>{% endfor %}</ol></section>
+<p class="disclaimer">This tool uses keyword matching and statistical text similarity. It does not understand every context, verify qualifications, or predict hiring outcomes. Do not add a skill unless you genuinely have it.</p>
+<a class="btn secondary" href="{{ url_for('dashboard') }}">Back to dashboard</a>
+{% endblock %}

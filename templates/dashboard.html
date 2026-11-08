@@ -1,0 +1,18 @@
+{% extends "base.html" %}
+{% block title %}Dashboard | ResumeIQ{% endblock %}
+{% block content %}
+<div class="page-heading"><div><div class="eyebrow">YOUR WORKSPACE</div><h1>Hello, {{ session.get('user_name') }}.</h1><p class="muted">Review your past analyses or compare another resume.</p></div><a class="btn" href="{{ url_for('analyze') }}">+ New analysis</a></div>
+<h2 class="section-title">Analysis history</h2>
+{% if records %}
+<div class="history-list">
+{% for item in records %}
+  <a class="history-item" href="{{ url_for('history_detail', analysis_id=item.id) }}">
+    <div><strong>{{ item.job_title }}</strong><small>{{ item.filename }} · {{ item.created_at.strftime('%d %b %Y, %I:%M %p') }}</small></div>
+    <span class="score-pill">{{ item.score }} / 100</span>
+  </a>
+{% endfor %}
+</div>
+{% else %}
+<div class="empty"><h3>No analyses yet</h3><p>Upload a resume and paste a job description to get started.</p><a href="{{ url_for('analyze') }}" class="btn">Analyze a resume</a></div>
+{% endif %}
+{% endblock %}
